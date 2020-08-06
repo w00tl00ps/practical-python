@@ -34,6 +34,19 @@ def read_prices(filename):
   
   return priceDict
 
+def make_report(portfolio, prices):
+  report = []
+  for x in portfolio:
+    name = x['name']
+    shares = x['shares']
+    price = prices[name]
+    change = price - x['price']
+    line = (name, shares, price, change)
+    report.append(line)
+    
+  
+  return report
+
 #
 # 
 #
@@ -42,9 +55,9 @@ portfolio = read_portfolio('Data/portfolio.csv')
 pprint(portfolio)
 pprint(prices)
 
+"""
 costBasis = 0
 currentValue = 0
-
 
 for x in portfolio:
   costBasis += x['price']*x['shares']
@@ -54,3 +67,15 @@ for x in portfolio:
 print('Cost Basis: ', costBasis)
 print('Current Value: ', currentValue)
 print('Gain/Loss', round(currentValue - costBasis, 2))
+"""
+
+report = make_report(portfolio, prices)
+#pprint(report)
+headers = ('Name', 'Shares', 'Price', 'Change')
+print('%10s %10s %10s %10s' % headers)
+print( ('-' * 10 + ' ') * len(headers))
+for name, shares, price, change in report:
+  price = '$' + str( round(price, 2))
+  print(f'{name:>10s} {shares:>10d} {price:>10s} {change:>10.2f}')
+
+  #print('%10s %10d %10.2f %10.2f' % r)
