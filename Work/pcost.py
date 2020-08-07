@@ -16,11 +16,12 @@ def portfolio_cost(filename):
   
   header = next(rows)
   
-  for row in rows:
+  for i, row in enumerate(rows, start=1):
+    record = dict( zip(header, row) )
     try:
-      total_cost += float(row[1]) * float(row[2])
+      total_cost += float(record['shares']) * float(record['price'])
     except ValueError:
-      print("Couldn't parse", row)
+      print(f'Bad row: {i} Couldn\'t parse: {row}')
     
   f.close()
   return total_cost
