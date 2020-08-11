@@ -4,33 +4,39 @@
 import csv
 from pprint import pprint
 
+from fileparse import parse_csv
+
 def read_portfolio(filename):
   portfolio = []
   portfolioDict = []
-  
-  with open(filename, 'rt') as f:
-    rows = csv.reader(f)
-    headers = next(rows)
-    for row in rows:
-      #record = dict( zip( headers, row) )
-      #portfolioDict.append( record )
-      portfolioDict.append({'name':row[0], 'shares':int(row[1]), 'price':float(row[2])})
-  
+  #Skip old code
+  #            '''
+  #            with open(filename, 'rt') as f:
+  #              rows = csv.reader(f)
+  #              headers = next(rows)
+  #              for row in rows:
+  #                #record = dict( zip( headers, row) )
+  #                #portfolioDict.append( record )
+  #                portfolioDict.append({'name':row[0], 'shares':int(row[1]), 'price':float(row[2])})
+  #                '''
+  portfolioDict = parse_csv(filename, types=[str,int,float])
   return portfolioDict
   
 def read_prices(filename):
   priceDict = {}
-  
-  f = open(filename,'r')
-  rows = csv.reader(f)
-  for row in rows:
-    try:
-      #stockDict = {row[0]:float(row[1])}
-      priceDict[row[0]] = float(row[1])
-    except IndexError:
-      print('IndexError: ', row)
-  f.close()
-  
+  #Skip old code
+  #            '''
+  #            f = open(filename,'r')
+  #            rows = csv.reader(f)
+  #            for row in rows:
+  #              try:
+  #                #stockDict = {row[0]:float(row[1])}
+  #                priceDict[row[0]] = float(row[1])
+  #              except IndexError:
+  #                print('IndexError: ', row)
+  #            f.close()'''
+  priceDict = dict(parse_csv(filename, has_headers=False))
+  print(priceDict)
   return priceDict
 
 def make_report(portfolio, prices):
@@ -38,7 +44,7 @@ def make_report(portfolio, prices):
   for x in portfolio:
     name = x['name']
     shares = int( x['shares'] )
-    price = prices[name]
+    price = float(prices[name])
     change = price - float( x['price'] )
     line = (name, shares, price, change)
     report.append(line)

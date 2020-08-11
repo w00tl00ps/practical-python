@@ -21,7 +21,7 @@ def parse_csv(filename, select=None, types=None, has_headers=True, delimiter2=',
     # Read the file headers, if present
     if has_headers:
       headers = next(rows)
-      print(headers)
+      #print(headers)
       
       indices = []
       modified_headers = []
@@ -56,11 +56,13 @@ def parse_csv(filename, select=None, types=None, has_headers=True, delimiter2=',
           
     elif not has_headers:
       for row in rows:
+        if not row:    # Skip rows with no data
+          continue     
         record = tuple(row)
         records.append(record)
   return records #list of dicts
   
-
+'''
 portfolio = parse_csv('Data/portfolio.csv', select = ['name', 'shares'])
 prices = parse_csv('Data/prices.csv', types=[str,float], has_headers=False)
 print('Portfolio 1')
@@ -73,3 +75,4 @@ print('Portfolio2')
 print(portfolio2)
 
 prices2 = parse_csv('Data/missing.csv', types=[str, int, float], silence_errors=True)
+'''

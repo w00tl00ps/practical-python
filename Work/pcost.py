@@ -3,27 +3,35 @@
 # Exercise 1.27
 import csv
 import sys
-
+import report
 
 
 def portfolio_cost(filename):
 
-  total_cost = 0
-  s = ''
+  #total_cost = 0
+  #s = ''
 
-  f = open(filename)
-  rows = csv.reader(f)
+  #f = open(filename)
+  #rows = csv.reader(f)
   
-  header = next(rows)
+  #header = next(rows)
   
-  for i, row in enumerate(rows, start=1):
-    record = dict( zip(header, row) )
-    try:
-      total_cost += float(record['shares']) * float(record['price'])
-    except ValueError:
-      print(f'Bad row: {i} Couldn\'t parse: {row}')
+  #for i, row in enumerate(rows, start=1):
+  #  record = dict( zip(header, row) )
+  #  try:
+  #    total_cost += float(record['shares']) * float(record['price'])
+  #  except ValueError:
+  #    print(f'Bad row: {i} Couldn\'t parse: {row}')
+  #  
+  #f.close()
+  
+  #Use report.py functions
+  portfolio = report.read_portfolio(filename)
+  #print(portfolio)
+  total_cost = 0
+  for row in portfolio:
+    total_cost += row['shares']*row['price']
     
-  f.close()
   return total_cost
   
   
