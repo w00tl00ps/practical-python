@@ -34,8 +34,19 @@ def portfolio_cost(filename):
     
   return total_cost
   
+def main(argv):
+  if len(sys.argv) != 2:
+    raise SystemExit(f'Usage: {sys.argv[0]} ' 'portfile')
+  print( portfolio_cost(argv[1]) )
   
+  return
+ 
 
+if __name__ == '__main__':
+    import sys
+    main(sys.argv)
+
+'''
 if len(sys.argv) == 2:
     filename = sys.argv[1]
 else:
@@ -45,7 +56,7 @@ print('System Arguments', sys.argv)
 
 cost = portfolio_cost(filename)
 print('Total cost:', cost)  
-  
+'''  
 """
 def portfolio_cost(filename):
 

@@ -36,7 +36,7 @@ def read_prices(filename):
   #                print('IndexError: ', row)
   #            f.close()'''
   priceDict = dict(parse_csv(filename, has_headers=False))
-  print(priceDict)
+  #print(priceDict)
   return priceDict
 
 def make_report(portfolio, prices):
@@ -76,9 +76,19 @@ def portfolio_report(portfolio_filename: str, prices_filename: str):
   return
 
 
+def main(argv):
+  if len(sys.argv) != 3:
+    raise SystemExit(f'Usage: {sys.argv[0]} ' 'portfile pricefile')
+  portfolio_filename = argv[1]
+  prices_filename = argv[2]
+  portfolio_report(portfolio_filename, prices_filename)
+  return
 
+if __name__ == '__main__':
+    import sys
+    main(sys.argv)
 
-portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
+#portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
 
 """
 costBasis = 0
