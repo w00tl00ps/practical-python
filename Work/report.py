@@ -19,7 +19,8 @@ def read_portfolio(filename):
   #                #portfolioDict.append( record )
   #                portfolioDict.append({'name':row[0], 'shares':int(row[1]), 'price':float(row[2])})
   #                '''
-  portfolioDict = parse_csv(filename, types=[str,int,float])
+  with open(filename) as f:
+    portfolioDict = parse_csv(f, types=[str,int,float])
   return portfolioDict
   
 def read_prices(filename):
@@ -35,7 +36,8 @@ def read_prices(filename):
   #              except IndexError:
   #                print('IndexError: ', row)
   #            f.close()'''
-  priceDict = dict(parse_csv(filename, has_headers=False))
+  with open(filename) as f:
+    priceDict = dict(parse_csv(f, has_headers=False))
   #print(priceDict)
   return priceDict
 
