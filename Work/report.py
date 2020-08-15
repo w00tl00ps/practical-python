@@ -2,6 +2,7 @@
 #
 # Exercise 2.4
 import csv
+import stock
 from pprint import pprint
 
 from fileparse import parse_csv
@@ -9,6 +10,7 @@ from fileparse import parse_csv
 def read_portfolio(filename):
   portfolio = []
   portfolioDict = []
+  stock_list = []
   #Skip old code
   #            '''
   #            with open(filename, 'rt') as f:
@@ -21,7 +23,10 @@ def read_portfolio(filename):
   #                '''
   with open(filename) as f:
     portfolioDict = parse_csv(f, types=[str,int,float])
-  return portfolioDict
+  
+  stock_list = [ stock.Stock(d['name'], d['shares'], d['price']) for d in portfolioDict ]
+  return stock_list
+  #return portfolioDict
   
 def read_prices(filename):
   priceDict = {}
@@ -42,12 +47,14 @@ def read_prices(filename):
   return priceDict
 
 def make_report(portfolio, prices):
+
   report = []
-  for x in portfolio:
-    name = x['name']
-    shares = int( x['shares'] )
+  for s in portfolio:
+    name = s.name #x['name']
+    shares = s.shares #int( x['shares'] )
     price = float(prices[name])
-    change = price - float( x['price'] )
+    change = price - float( s.price) #['price'] )
+    
     line = (name, shares, price, change)
     report.append(line)
     

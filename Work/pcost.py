@@ -4,6 +4,7 @@
 import csv
 import sys
 import report
+import stock
 
 
 def portfolio_cost(filename):
@@ -28,11 +29,11 @@ def portfolio_cost(filename):
   #Use report.py functions
   portfolio = report.read_portfolio(filename)
   #print(portfolio)
-  total_cost = 0
-  for row in portfolio:
-    total_cost += row['shares']*row['price']
+  #total_cost = 0
+  #for row in portfolio:
+  #  total_cost += row['shares']*row['price']
     
-  return total_cost
+  return sum( [ s.cost() for s in portfolio ] )
   
 def main(argv):
   if len(sys.argv) != 2:

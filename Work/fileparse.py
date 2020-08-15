@@ -17,12 +17,12 @@ def parse_csv(filename, select=None, types=None, has_headers=True, delimiter2=',
   
   #with open(filename) as f:
   rows = csv.reader(filename, delimiter=delimiter2)
-   ##########################################
-    # Read the file headers, if present
-
+  
+  ##########################################
+  # Read the file headers, if present
   if has_headers:
     headers = next(rows)
-    print(headers)
+    #print(headers)
     
     indices = []
     modified_headers = []
