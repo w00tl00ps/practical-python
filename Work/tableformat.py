@@ -25,7 +25,7 @@ class TextTableFormatter(TableFormatter):
     
   def row(self, rowdata):
     for d in rowdata:
-      print(f'{d:>10s}', end=' ')
+      print(f'{str(d):>10s}', end=' ')
     print()
  
 class CSVTableFormatter(TableFormatter):
@@ -67,3 +67,12 @@ def create_formatter(name):
     raise RuntimeError(f'Unknown format {fmt}')
     
   return formatter
+
+def print_table(obj_list, attribute_list, formatter):
+  headers = attribute_list
+  
+  formatter.headings(headers)
+  #rowdata = [ name, str(shares), f'{price:0.2f}', f'{change:0.2f}']
+  for o in obj_list:
+    rowdata = [ getattr(o, colname) for colname in headers ]
+    formatter.row(rowdata)
