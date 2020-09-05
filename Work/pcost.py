@@ -33,7 +33,7 @@ def portfolio_cost(filename):
   #for row in portfolio:
   #  total_cost += row['shares']*row['price']
     
-  return sum( [ s.cost() for s in portfolio ] )
+  return sum( [ s.cost for s in portfolio ] )
   
 def main(argv):
   if len(sys.argv) != 2:

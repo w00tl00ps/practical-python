@@ -64,7 +64,7 @@ def create_formatter(name):
   elif name == 'html':
     formatter = HTMLTableFormatter()
   else:
-    raise RuntimeError(f'Unknown format {fmt}')
+    raise FormatError(f'Unknown format {name}')
     
   return formatter
 
@@ -76,3 +76,6 @@ def print_table(obj_list, attribute_list, formatter):
   for o in obj_list:
     rowdata = [ getattr(o, colname) for colname in headers ]
     formatter.row(rowdata)
+    
+class FormatError(Exception):
+  pass
