@@ -36,6 +36,11 @@ def follow(filename):
             continue
         yield line
 
+def filematch(lines, substr):
+    for line in lines:
+        if substr in line:
+            yield line
+
 """ 
 if __name__ == '__main__':
     for line in follow('Data/stocklog.csv'):
@@ -47,6 +52,7 @@ if __name__ == '__main__':
             print(f'{name:>10s} {price:>10.2f} {change:>10.2f}') 
 """
 
+"""
 if __name__ == '__main__':
     import report
 
@@ -59,3 +65,5 @@ if __name__ == '__main__':
         change = float(fields[4])
         if name in portfolio:
             print(f'{name:>10s} {price:>10.2f} {change:>10.2f}')
+
+"""
