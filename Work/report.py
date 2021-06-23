@@ -8,7 +8,7 @@ import tableformat
 from fileparse import parse_csv
 from portfolio import Portfolio
 
-def read_portfolio(filename):
+def read_portfolio(filename, **opts):
   portfolio = []
   portfolioDict = []
   stock_list = []
@@ -23,9 +23,10 @@ def read_portfolio(filename):
   #                portfolioDict.append({'name':row[0], 'shares':int(row[1]), 'price':float(row[2])})
   #                '''
   with open(filename) as f:
-    portfolioDict = parse_csv(f, types=[str,int,float])
+    portfolioDict = parse_csv(f, types=[str,int,float], **opts)
   
-  portfolio = [ stock.Stock(d['name'], d['shares'], d['price']) for d in portfolioDict ]
+  #portfolio = [ stock.Stock(d['name'], d['shares'], d['price']) for d in portfolioDict ]
+  portfolio = [ stock.Stock(**d) for d in portfolioDict ]
   return Portfolio(portfolio)
 
   #stock_list = [ stock.Stock(d['name'], d['shares'], d['price']) for d in portfolioDict ]
