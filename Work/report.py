@@ -23,11 +23,12 @@ def read_portfolio(filename, **opts):
   #                portfolioDict.append({'name':row[0], 'shares':int(row[1]), 'price':float(row[2])})
   #                '''
   with open(filename) as f:
-    portfolioDict = parse_csv(f, types=[str,int,float], **opts)
+    return Portfolio.from_csv(f, **opts)
+    #portfolioDict = parse_csv(f, types=[str,int,float], **opts)
   
   #portfolio = [ stock.Stock(d['name'], d['shares'], d['price']) for d in portfolioDict ]
-  portfolio = [ stock.Stock(**d) for d in portfolioDict ]
-  return Portfolio(portfolio)
+ # portfolio = [ stock.Stock(**d) for d in portfolioDict ]
+  #return Portfolio(portfolio)
 
   #stock_list = [ stock.Stock(d['name'], d['shares'], d['price']) for d in portfolioDict ]
   #return stock_list
@@ -104,7 +105,7 @@ def portfolio_report(portfolio_filename: str, prices_filename: str, fmt='txt'):
 
 def main(argv):
   if len(sys.argv) != 4:
-    raise SystemExit(f'Usage: {sys.argv[0]} ' 'portfile pricefile')
+    raise SystemExit(f'Usage: {sys.argv[0]} ' 'portfile pricefile format')
   portfolio_filename = argv[1]
   prices_filename = argv[2]
   format = argv[3]
