@@ -1,9 +1,15 @@
+from typedproperty import typedproperty, String, Integer, Float
+
 class Stock:
-  __slots__ = ('name','_shares', 'price')
+  name = String('name')
+  shares = Integer('shares')
+  price = Float('price')
+
+  #__slots__ = ('name','_shares', 'price') FOR SAVING RAM
+
   def __init__(self, name, shares, price):
 
     self._shares = shares
-    
     self.name = name    
     self.price = price
   
@@ -18,6 +24,7 @@ class Stock:
     self.shares -= num_shares
     return
   
+  ''' NOT NEEDED WITH TYPED PROPERTIES
   @property
   def shares(self):
     return self._shares
@@ -27,3 +34,4 @@ class Stock:
     if not isinstance(value, int):
       raise TypeError('Expected int')
     self._shares = value
+  '''
