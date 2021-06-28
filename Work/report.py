@@ -106,6 +106,16 @@ def portfolio_report(portfolio_filename: str, prices_filename: str, fmt='txt'):
 def main(argv):
   if len(sys.argv) != 4:
     raise SystemExit(f'Usage: {sys.argv[0]} ' 'portfile pricefile format')
+
+  # This file sets up basic configuration of the logging module.
+  # Change settings here to adjust logging output as needed.
+  import logging
+  logging.basicConfig(
+      filename = 'app.log',            # Name of the log file (omit to use stderr)
+      filemode = 'w',                  # File mode (use 'a' to append)
+      level    = logging.WARNING,      # Logging level (DEBUG, INFO, WARNING, ERROR, or CRITICAL)
+  )
+
   portfolio_filename = argv[1]
   prices_filename = argv[2]
   format = argv[3]

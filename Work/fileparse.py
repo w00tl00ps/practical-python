@@ -3,6 +3,8 @@
 # Exercise 3.3
 
 import csv
+import logging
+log = logging.getLogger(__name__)
 
 def parse_csv(filename, select=None, types=None, has_headers=True, delimiter2=',', silence_errors=False ):
   '''
@@ -52,7 +54,10 @@ def parse_csv(filename, select=None, types=None, has_headers=True, delimiter2=',
             modified_row = [ (row[i]) for i in indices ]
         except ValueError as e:
           if not silence_errors:
-            print('Error processing row ', rowCount, row)
+            #print('Error processing row ', rowCount, row)
+            log.warning("Row %d: Couldn't convert %s", rowCount, row)
+            log.debug("Row %d: Reason %s", rowCount, e)
+          continue  
  
         record = dict(zip(modified_headers, modified_row))
         records.append(record)
