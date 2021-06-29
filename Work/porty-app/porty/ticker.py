@@ -1,8 +1,8 @@
 #ticker.py
 
-from follow import follow
+from .follow import follow
 import csv
-import report
+from. import report
 
 def select_columns(rows, indices):
     for row in rows:

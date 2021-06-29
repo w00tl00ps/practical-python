@@ -2,11 +2,11 @@
 #
 # Exercise 2.4
 import csv
-import stock
-import tableformat
+from . import stock
+from . import tableformat
 
-from fileparse import parse_csv
-from portfolio import Portfolio
+from .fileparse  import parse_csv
+from .portfolio import Portfolio
 
 def read_portfolio(filename, **opts):
   portfolio = []
@@ -104,6 +104,7 @@ def portfolio_report(portfolio_filename: str, prices_filename: str, fmt='txt'):
 
 
 def main(argv):
+  import sys
   if len(sys.argv) != 4:
     raise SystemExit(f'Usage: {sys.argv[0]} ' 'portfile pricefile format')
 
